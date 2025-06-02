@@ -90,13 +90,3 @@ def delete_file(file_path):
         os.remove(file_path)
     else:
         print(f"File {file_path} does not exists, so it could not be deleted.")
-
-
-if __name__ == "__main__":
-    downloaded_file_name = download_latest_file()
-    if downloaded_file_name != None:
-        compressed_file_location = grib_folder + downloaded_file_name + ".grib2.gz"
-        decompressed_file_location = grib_folder + downloaded_file_name + ".grib2"
-        decompress_file(compressed_file_location, decompressed_file_location)
-        delete_idx_files(grib_folder)
-        delete_file(compressed_file_location)
