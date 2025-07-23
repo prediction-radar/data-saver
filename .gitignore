@@ -1,2 +1,4 @@
 grib_files/
 npy_files/
+sync_prod.sh
+storage/v2_npy_files
