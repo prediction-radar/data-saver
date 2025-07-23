@@ -114,18 +114,15 @@ def process_all_recent_files():
         url = urljoin(base_url, file_name)
         remote_file_size = get_remote_file_size(url)
         need_redownload = False
-        # Check if .grib2.gz exists and matches remote size
         if os.path.exists(npy_file_location):
             local_file_size = os.path.getsize(npy_file_location)
-            if local_file_size == 0:
+            if local_file_size > 0:
+                print(f"{npy_file_location} already exists and is non-empty. Skipping.")
+                continue
+            else:
                 print(f"{npy_file_location} exists but is empty. Redownloading.")
                 os.remove(npy_file_location)
                 need_redownload = True
-            else:
-                # If .npy exists and .grib2.gz is good, skip
-                if os.path.exists(npy_file_location):
-                    print(f"{npy_file_location} already exists. Skipping.")
-                    continue
         else:
             print(f"{npy_file_location} does not exist. Downloading.")
             need_redownload = True
